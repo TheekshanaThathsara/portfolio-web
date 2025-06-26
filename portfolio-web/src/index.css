@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base styles */
+:root {
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+@layer base {
+  html {
+    @apply scroll-smooth;
+  }
+  
+  body {
+    @apply bg-white text-gray-800 dark:bg-gray-900 dark:text-gray-100;
+    font-family: 'Inter', 'Poppins', system-ui, sans-serif;
+    @apply transition-colors duration-300;
+  }
+
+  ::selection {
+    @apply bg-teal-500/30 dark:bg-teal-500/50;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', 'Inter', system-ui, sans-serif;
+    @apply font-semibold;
+  }
+}
+
+@layer components {
+  /* Card styling */
+  .card {
+    @apply bg-white dark:bg-gray-800 rounded-xl shadow-soft dark:shadow-soft-dark transition-all duration-300;
+  }
+
+  /* Section styling */
+  .section {
+    @apply py-16 md:py-24;
+  }
+
+  /* Button styling */
+  .btn {
+    @apply px-6 py-3 rounded-lg font-medium transition-all duration-300;
+  }
+
+  .btn-primary {
+    @apply bg-teal-500 hover:bg-teal-600 text-white shadow-md hover:shadow-lg transform hover:-translate-y-1;
+  }
+
+  .btn-secondary {
+    @apply bg-blue-500 hover:bg-blue-600 text-white shadow-md hover:shadow-lg transform hover:-translate-y-1;
+  }
+
+  .btn-outline {
+    @apply border-2 border-teal-500 text-teal-500 hover:bg-teal-500 hover:text-white;
+  }
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}

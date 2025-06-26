@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-scroll';
 import { textClass, buttonClass } from '../utils/styleUtils';
+import profileImg from '../assets/profileimg.jpg';
 
 const HeroSection = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -35,10 +36,10 @@ const HeroSection = () => {
             transition={{ delay: 0.2, duration: 0.5 }}
           >
             <div className="w-28 h-28 sm:w-32 sm:h-32 rounded-full overflow-hidden border-4 border-white dark:border-gray-800 shadow-lg">
-              {/* Replace with your profile picture */}
+              {/* Your profile picture from assets */}
               <img 
-                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" 
-                alt="Profile" 
+                src={profileImg} 
+                alt="Theekshana Thathsara" 
                 className="w-full h-full object-cover"
               />
             </div>

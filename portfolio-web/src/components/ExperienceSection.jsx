@@ -15,52 +15,52 @@ const ExperienceSection = () => {
       id: 1,
       type: 'education',
       title: 'Bachelor of Science in Computer Science',
-      organization: 'University of Technology',
-      location: 'San Francisco, CA',
-      date: '2018 - 2022',
-      description: 'Graduated with honors. Specialized in full-stack development and UI/UX design. Completed capstone project on building accessible web applications for users with disabilities.',
+      organization: 'University of Colombo School of Computing',
+      location: 'San Colombo, Sri Lanka',
+      date: '2023 - Present',
+      description: 'Gained strong academic experience in data structures and algorithms, software engineering, design patterns, web development, mobile app development, human-computer interaction, and project management..',
       skills: ['Algorithms', 'Data Structures', 'Software Engineering', 'Web Development', 'UI/UX Design']
     },
     {
       id: 2,
       type: 'work',
-      title: 'Junior Front-end Developer',
-      organization: 'TechStart Solutions',
-      location: 'San Francisco, CA',
-      date: '2022 - 2023',
+      title: 'Full stack Developer',
+      organization: ' Device Gallery Hub',
+      location: 'Colombo, Sri Lanka',
+      date: '2025 - Present',
       description: 'Developed responsive user interfaces for multiple client projects. Collaborated with design and back-end teams to implement seamless user experiences. Reduced load time by 40% through code optimization.',
-      skills: ['React', 'JavaScript', 'CSS', 'HTML', 'Git', 'Responsive Design']
+      skills: ['React', 'JavaScript', 'Tailwindcss', 'Express', 'MongoDB', 'NodeJs' ]
     },
-    {
-      id: 3,
-      type: 'work',
-      title: 'Full-stack Developer',
-      organization: 'Digital Innovations Inc.',
-      location: 'San Jose, CA',
-      date: '2023 - 2024',
-      description: 'Led development of e-commerce platform serving 10,000+ daily users. Implemented secure payment processing system and user authentication. Optimized database queries reducing server response time by 60%.',
-      skills: ['React', 'Node.js', 'Express', 'MongoDB', 'Redux', 'Payment APIs']
-    },
-    {
-      id: 4,
-      type: 'education',
-      title: 'UI/UX Design Certification',
-      organization: 'Design Institute Online',
-      location: 'Remote',
-      date: '2024',
-      description: 'Advanced certification in user interface and experience design. Focused on accessibility, user research methodologies, and creating design systems. Completed 5 real-world projects with client feedback.',
-      skills: ['Figma', 'Adobe XD', 'User Research', 'Wireframing', 'Design Systems', 'Prototyping']
-    },
-    {
-      id: 5,
-      type: 'work',
-      title: 'Senior Frontend Developer',
-      organization: 'InnovateTech Solutions',
-      location: 'San Francisco, CA',
-      date: '2024 - Present',
-      description: 'Currently leading a team of 5 developers building a next-generation SaaS platform. Implementing CI/CD pipelines and modern frontend architecture. Mentoring junior developers and establishing best practices.',
-      skills: ['React', 'TypeScript', 'Next.js', 'Tailwind CSS', 'CI/CD', 'Team Leadership']
-    }
+    //{
+    //   id: 3,
+    //   type: 'work',
+    //   title: 'Full-stack Developer',
+    //   organization: 'Digital Innovations Inc.',
+    //   location: 'San Jose, CA',
+    //   date: '2023 - 2024',
+    //   description: 'Led development of e-commerce platform serving 10,000+ daily users. Implemented secure payment processing system and user authentication. Optimized database queries reducing server response time by 60%.',
+    //   skills: ['React', 'Node.js', 'Express', 'MongoDB', 'Redux', 'Payment APIs']
+    // },
+    // {
+    //   id: 4,
+    //   type: 'education',
+    //   title: 'UI/UX Design Certification',
+    //   organization: 'Design Institute Online',
+    //   location: 'Remote',
+    //   date: '2024',
+    //   description: 'Advanced certification in user interface and experience design. Focused on accessibility, user research methodologies, and creating design systems. Completed 5 real-world projects with client feedback.',
+    //   skills: ['Figma', 'Adobe XD', 'User Research', 'Wireframing', 'Design Systems', 'Prototyping']
+    // },
+    // {
+    //   id: 5,
+    //   type: 'work',
+    //   title: 'Senior Frontend Developer',
+    //   organization: 'InnovateTech Solutions',
+    //   location: 'San Francisco, CA',
+    //   date: '2024 - Present',
+    //   description: 'Currently leading a team of 5 developers building a next-generation SaaS platform. Implementing CI/CD pipelines and modern frontend architecture. Mentoring junior developers and establishing best practices.',
+    //   skills: ['React', 'TypeScript', 'Next.js', 'Tailwind CSS', 'CI/CD', 'Team Leadership']
+    // }
   ];
 
   const containerVariants = {

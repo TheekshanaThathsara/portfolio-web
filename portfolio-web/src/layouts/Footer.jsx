@@ -37,10 +37,10 @@ const Footer = () => {
             </span>
           </h3>
           
-          <p className="text-gray-400 mb-4">
-            Designed & Built with ❤️
+          {/* <p className="text-gray-400 mb-4">
+            Designed By Theekshana Thathsara
           </p>
-          
+           */}
           <p className="text-gray-500">
             &copy; {currentYear} Theekshana Thathsara. All rights reserved.
           </p>

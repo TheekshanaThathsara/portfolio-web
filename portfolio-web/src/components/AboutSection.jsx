@@ -27,10 +27,10 @@ const AboutSection = () => {
           <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl p-8 md:p-10">
             <div className="space-y-6 text-gray-700 dark:text-gray-300">
               <p className="text-lg leading-relaxed">
-                I hold a <strong>Bachelor's degree in Computer Science</strong> from the University of Technology, 
-                where I cultivated a strong foundation in algorithmic thinking and software engineering principles. 
-                My academic journey equipped me with the technical knowledge that I've continued to build upon through 
-                real-world projects and continuous learning.
+                I’m currently an undergraduate at the <strong>University of Colombo School of Computing,</strong> 
+                pursuing a <strong>Bachelor’s degree in Computer Science.</strong> My academic journey has laid a strong 
+                foundation in algorithmic thinking, software engineering, and modern computing principles—skills 
+                I continuously sharpen through real-world projects, research, and hands-on learning.
               </p>
               
               <p className="text-lg leading-relaxed">

@@ -57,19 +57,19 @@ const ContactSection = () => {
     {
       name: 'GitHub',
       icon: <FaGithub size={24} />,
-      url: 'https://github.com/yourusername',
+      url: 'https://github.com/TheekshanaThathsara',
       color: 'hover:text-gray-900 dark:hover:text-gray-100',
     },
     {
       name: 'LinkedIn',
       icon: <FaLinkedin size={24} />,
-      url: 'https://linkedin.com/in/yourusername',
+      url: 'https://linkedin.com/in/theekshana-thathsara-03947828a',
       color: 'hover:text-blue-700 dark:hover:text-blue-400',
     },
     {
       name: 'Email',
       icon: <FaEnvelope size={24} />,
-      url: 'mailto:your.email@example.com',
+      url: 'mailto:thathsaragpht@gmail.com',
       color: 'hover:text-red-600 dark:hover:text-red-400',
     },
   ];
@@ -213,7 +213,7 @@ const ContactSection = () => {
                   I'm currently available for freelance work and full-time positions. If you have a project that you want to get started, think you need my help with something, or just want to say hello, then get in touch.
                 </p>
                 <p>
-                  Based in San Francisco, California. Available for remote work worldwide.
+                  Based in Colombo, Sri Lanka. Available for remote work worldwide.
                 </p>
               </div>
               
@@ -239,13 +239,13 @@ const ContactSection = () => {
               <div>
                 <h4 className="text-xl font-medium mb-4">Preferred contact method</h4>
                 <p>
-                  Email is the best way to contact me for any inquiries. I typically respond within 24-48 hours.
+                  Email is the best way to contact me for any inquiries. I typically respond within 24 hours.
                 </p>
                 <a 
                   href="mailto:your.email@example.com" 
                   className="inline-block mt-3 border-b-2 border-white hover:border-opacity-100 border-opacity-50 font-medium transition-all"
                 >
-                  your.email@example.com
+                  thathsaragpht@gmail.com
                 </a>
               </div>
             </div>

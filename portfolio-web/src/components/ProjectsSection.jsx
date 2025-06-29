@@ -3,6 +3,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { FaGithub, FaExternalLinkAlt, FaTimes } from 'react-icons/fa';
 import { cardClass, buttonClass, textClass } from '../utils/styleUtils';
+import timberlyImage from '../assets/timberly.jpeg';
+import devicegalleryhubImage from '../assets/devicegalleryhub.jpeg';
+import travelsriImage from '../assets/travelsri.jpeg';
+import portfolioImage from '../assets/portfoliopic.jpeg'; // Assuming you have a portfolio image
+
 
 const ProjectsSection = () => {
   const [ref, inView] = useInView({
@@ -17,30 +22,30 @@ const ProjectsSection = () => {
   const projects = [
     {
       id: 1,
-      title: "E-Commerce Platform",
-      summary: "A full-featured online store with product listings, cart functionality, and secure checkout process.",
-      technologies: ["React", "Node.js", "MongoDB", "Stripe"],
-      github: "https://github.com/yourusername/ecommerce-platform",
-      demo: "https://ecommerce-demo.yourdomain.com",
-      image: "https://images.unsplash.com/photo-1557821552-17105176677c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80"
+      title: "Timberly - Smart Furniture Marketplace Platform",
+      summary: "Timberly is a full-stack web platform that connects customers and furniture suppliers through custom orders, real-time tracking, and efficient inventory management with product listings, cart functionality, and secure checkout process.",
+      technologies: ["HTML", "CSS", "JavaScript", "PHP", "MySQL","Stripe"],
+      github: "https://github.com/sajeeahrasmi/Timberly",
+      demo: "#",
+      image: timberlyImage
     },
     {
       id: 2,
-      title: "Task Management App",
-      summary: "Intuitive application for managing personal and team tasks with real-time updates and deadline tracking.",
-      technologies: ["React", "Firebase", "Tailwind CSS", "Redux"],
-      github: "https://github.com/yourusername/task-manager",
-      demo: "https://task-app.yourdomain.com",
-      image: "https://images.unsplash.com/photo-1540350394557-8d14678e7f91?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80"
+      title: "Device Gallery Hub — Responsive E-Commerce Platform for Mobile Accessories",
+      summary: "A full-featured MERN stack e-commerce solution offering a seamless, responsive shopping experience for mobile accessories across desktop, tablet, and mobile devices",
+      technologies: ["React", "Express", "Tailwind CSS", "MongoDB", "Node.js"],
+      github: "https://github.com/TheekshanaThathsara/device-gallery-hub",
+      demo: "#",
+      image: devicegalleryhubImage
     },
     {
       id: 3,
-      title: "Weather Dashboard",
-      summary: "Interactive weather visualization with forecasts, historical data, and location-based services.",
-      technologies: ["JavaScript", "Chart.js", "Weather API", "Geolocation"],
-      github: "https://github.com/yourusername/weather-dashboard",
-      demo: "https://weather-app.yourdomain.com",
-      image: "https://images.unsplash.com/photo-1592210454359-9043f067919b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+      title: "TravelSri - All-in-One Travel Planning Platform for Sri Lanka",
+      summary: "A responsive web application that helps users plan personalized trips across Sri Lanka by combining guides, hotel bookings, transport, and travel packages into one seamless experience.",
+      technologies: ["React", "Java Springboot","Chart.js", "MongoDB", "Stripe"],
+      github: "#",
+      demo: "#",
+      image: travelsriImage
     },
     {
       id: 4,
@@ -49,15 +54,15 @@ const ProjectsSection = () => {
       technologies: ["React", "Framer Motion", "Tailwind CSS"],
       github: "https://github.com/yourusername/portfolio",
       demo: "https://yourdomain.com",
-      image: "https://images.unsplash.com/photo-1517180102446-f3ece451e9d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+      image: portfolioImage
     },
     {
       id: 5,
       title: "Fitness Tracker",
       summary: "Mobile-responsive application for tracking workouts, nutrition, and fitness goals with visual progress reports.",
       technologies: ["React Native", "Express.js", "MongoDB", "D3.js"],
-      github: "https://github.com/yourusername/fitness-tracker",
-      demo: "https://fitness-app.yourdomain.com",
+      github: "#",
+      demo: "#",
       image: "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
     },
     {
@@ -65,8 +70,8 @@ const ProjectsSection = () => {
       title: "Social Media Dashboard",
       summary: "Comprehensive analytics dashboard for monitoring social media engagement across multiple platforms.",
       technologies: ["Vue.js", "Django", "PostgreSQL", "Social Media APIs"],
-      github: "https://github.com/yourusername/social-dashboard",
-      demo: "https://social-dashboard.yourdomain.com",
+      github: "#",
+      demo: "#",
       image: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80"
     }
   ];
@@ -191,15 +196,15 @@ const ProjectsSection = () => {
             <motion.div
               key={project.id}
               variants={cardVariants}
-              className={`${cardClass} overflow-hidden cursor-pointer`}
+              className={`${cardClass} overflow-hidden cursor-pointer flex flex-col h-full`}
               onClick={() => setSelectedProject(project)}
               whileHover={{ y: -8 }}
             >
-              <div className="aspect-video overflow-hidden">
+              <div className="aspect-[4/3] overflow-hidden relative group">
                 <img 
                   src={project.image} 
                   alt={project.title} 
-                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -215,7 +220,7 @@ const ProjectsSection = () => {
                 </p>
                 
                 <div className="mb-4 flex flex-wrap gap-1.5">
-                  {project.technologies.slice(0, 3).map((tech, idx) => (
+                  {project.technologies.slice(0, 4).map((tech, idx) => (
                     <span 
                       key={idx} 
                       className="text-xs font-medium px-2 py-0.5 rounded-full bg-teal-100 text-teal-800 dark:bg-teal-900/40 dark:text-teal-300"
@@ -223,9 +228,9 @@ const ProjectsSection = () => {
                       {tech}
                     </span>
                   ))}
-                  {project.technologies.length > 3 && (
+                  {project.technologies.length > 4 && (
                     <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300">
-                      +{project.technologies.length - 3}
+                      +{project.technologies.length - 4}
                     </span>
                   )}
                 </div>
@@ -300,7 +305,7 @@ const ProjectsSection = () => {
                 <img 
                   src={selectedProject.image} 
                   alt={selectedProject.title}
-                  className="w-full h-48 sm:h-64 md:h-80 object-cover"
+                  className="w-full h-52 sm:h-72 md:h-96 object-cover"
                 />
                 <button
                   onClick={() => setSelectedProject(null)}

@@ -32,23 +32,36 @@ const ContactSection = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setFormStatus({ submitted: false, submitting: true, error: null });
-
     try {
-      // In a real application, you would send the form data to your backend or a form service
-      // This is a mock submission - replace with your actual form handling logic
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      setFormStatus({ submitted: true, submitting: false, error: null });
-      
-      // Clear the form after submission
-      setFormData({ name: '', email: '', message: '' });
-      
-    } catch (error) {
-      console.error('Error submitting form:', error);
-      setFormStatus({
-        submitted: false, 
-        submitting: false, 
-        error: 'There was an error submitting your form. Please try again.'
+      // Try submitting to a Netlify Function that sends email via SendGrid
+      const res = await fetch('/.netlify/functions/send-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
       });
+
+      if (res.ok) {
+        setFormStatus({ submitted: true, submitting: false, error: null });
+        setFormData({ name: '', email: '', message: '' });
+        return;
+      }
+
+      const text = await res.text();
+      throw new Error(text || 'Function error');
+    } catch (error) {
+      console.warn('Serverless send failed, falling back to mailto —', error);
+
+      // Fallback: open user's default mail client with pre-filled subject/body
+      const subject = encodeURIComponent(`Portfolio message from ${formData.name || formData.email || 'Website'}`);
+      const body = encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`);
+      const mailto = `mailto:thathsaragpht@gmail.com?subject=${subject}&body=${body}`;
+
+      // Attempt to open mail client
+      window.location.href = mailto;
+
+      // Mark as submitted (user will send via their mail client)
+      setFormStatus({ submitted: true, submitting: false, error: null });
+      setFormData({ name: '', email: '', message: '' });
     }
   };
 
@@ -121,7 +134,10 @@ const ContactSection = () => {
                 </button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit}>
+              <form onSubmit={handleSubmit} name="contact" data-netlify="true" netlify-honeypot="bot-field">
+                {/* Netlify form hidden fields */}
+                <input type="hidden" name="form-name" value="contact" />
+                <input type="hidden" name="bot-field" />
                 <div className="mb-6">
                   <label htmlFor="name" className="block text-gray-700 dark:text-gray-300 mb-2">Name</label>
                   <input
@@ -242,7 +258,7 @@ const ContactSection = () => {
                   Email is the best way to contact me for any inquiries. I typically respond within 24 hours.
                 </p>
                 <a 
-                  href="mailto:your.email@example.com" 
+                  href="mailto:thathsaragpht@gmail.com" 
                   className="inline-block mt-3 border-b-2 border-white hover:border-opacity-100 border-opacity-50 font-medium transition-all"
                 >
                   thathsaragpht@gmail.com

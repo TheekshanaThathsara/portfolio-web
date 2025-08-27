@@ -62,7 +62,7 @@ const HeroSection = () => {
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.4, duration: 0.7 }}
           >
-            Full-Stack Developer & UI/UX Designer
+            Software Engineering Enthusiast | MERN & Springboot Developer | Explore .NET
           </motion.h2>
           
           <motion.p 

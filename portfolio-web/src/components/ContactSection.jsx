@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { FaGithub, FaLinkedin, FaEnvelope, FaPaperPlane } from 'react-icons/fa';
+import emailjs from '@emailjs/browser';
 
 const ContactSection = () => {
   const [ref, inView] = useInView({
@@ -32,25 +33,42 @@ const ContactSection = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setFormStatus({ submitted: false, submitting: true, error: null });
+    
     try {
-      // Try submitting to a Netlify Function that sends email via SendGrid
-      const res = await fetch('/.netlify/functions/send-email', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      });
+      // EmailJS configuration from environment variables
+      const serviceID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+      const templateID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+      const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
-      if (res.ok) {
-        setFormStatus({ submitted: true, submitting: false, error: null });
-        setFormData({ name: '', email: '', message: '' });
-        return;
+      // Check if EmailJS is properly configured
+      if (!serviceID || !templateID || !publicKey || 
+          serviceID === 'your_service_id_here' || 
+          templateID === 'your_template_id_here' || 
+          publicKey === 'your_public_key_here') {
+        throw new Error('EmailJS not configured');
       }
 
-      const text = await res.text();
-      throw new Error(text || 'Function error');
-    } catch (error) {
-      console.warn('Serverless send failed, falling back to mailto —', error);
+      const templateParams = {
+        from_name: formData.name,
+        from_email: formData.email,
+        message: formData.message,
+        reply_to: formData.email,
+        to_name: 'Theekshana Thathsara',
+        website_url: 'https://thathsara.netlify.app',
+        timestamp: new Date().toLocaleString(),
+      };
 
+      const response = await emailjs.send(serviceID, templateID, templateParams, publicKey);
+      
+      if (response.status === 200) {
+        setFormStatus({ submitted: true, submitting: false, error: null });
+        setFormData({ name: '', email: '', message: '' });
+      } else {
+        throw new Error('Failed to send email');
+      }
+    } catch (error) {
+      console.error('EmailJS send failed:', error);
+      
       // Fallback: open user's default mail client with pre-filled subject/body
       const subject = encodeURIComponent(`Portfolio message from ${formData.name || formData.email || 'Website'}`);
       const body = encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`);

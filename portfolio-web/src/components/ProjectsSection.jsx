@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { FaGithub, FaExternalLinkAlt, FaTimes } from 'react-icons/fa';
+import { FaGithub, FaExternalLinkAlt, FaTimes, FaCode, FaEye, FaInfoCircle } from 'react-icons/fa';
 import { cardClass, buttonClass, textClass } from '../utils/styleUtils';
 import timberlyImage from '../assets/timberly.jpeg';
 import devicegalleryhubImage from '../assets/devicegalleryhub.jpeg';
@@ -81,20 +81,40 @@ const ProjectsSection = () => {
     hidden: {},
     visible: {
       transition: {
-        staggerChildren: 0.1
+        staggerChildren: 0.15
       }
     }
   };
 
   const cardVariants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { 
+      opacity: 0, 
+      y: 50,
+      scale: 0.9,
+      rotateX: 20
+    },
     visible: { 
       opacity: 1, 
-      y: 0, 
+      y: 0,
+      scale: 1,
+      rotateX: 0,
       transition: { 
-        duration: 0.6,
-        ease: "easeOut" 
+        duration: 0.8,
+        ease: [0.25, 0.46, 0.45, 0.94]
       } 
+    }
+  };
+
+  const hoverVariants = {
+    hover: {
+      y: -12,
+      scale: 1.02,
+      rotateX: 5,
+      rotateY: 5,
+      transition: {
+        duration: 0.3,
+        ease: "easeOut"
+      }
     }
   };
 
@@ -196,67 +216,135 @@ const ProjectsSection = () => {
             <motion.div
               key={project.id}
               variants={cardVariants}
-              className={`${cardClass} overflow-hidden cursor-pointer flex flex-col h-full`}
+              whileHover="hover"
+              className="bg-white dark:bg-gray-800 rounded-xl shadow-lg dark:shadow-gray-900/30 
+                       overflow-hidden cursor-pointer flex flex-col h-full"
+              style={{
+                perspective: '1000px',
+                transformStyle: 'preserve-3d'
+              }}
               onClick={() => setSelectedProject(project)}
-              whileHover={{ y: -8 }}
             >
               <div className="aspect-[4/3] overflow-hidden relative group">
-                <img 
+                <motion.img 
                   src={project.image} 
                   alt={project.title} 
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  className="w-full h-full object-cover transition-all duration-500 group-hover:scale-110"
                   loading="lazy"
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.3 }}
                 />
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <motion.div 
+                  className="absolute inset-0 bg-gradient-to-tr from-primary-600/80 via-transparent to-accent-500/60 
+                           opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  initial={{ opacity: 0 }}
+                  whileHover={{ opacity: 1 }}
+                />
+                <motion.div 
+                  className="absolute top-4 right-4 flex space-x-2"
+                  initial={{ opacity: 0, y: -20 }}
+                  whileHover={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 }}
+                >
+                  <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm p-2 rounded-full 
+                               shadow-lg border border-gray-200/50 dark:border-gray-600/50">
+                    <FaCode className="text-primary-600 dark:text-primary-400 text-lg" />
+                  </div>
+                </motion.div>
               </div>
               
-              <div className="p-3 xs:p-4 sm:p-6">
-                <h3 className="text-base xs:text-lg sm:text-xl font-bold text-gray-800 dark:text-white mb-2 line-clamp-2">
+              <div className="p-3 xs:p-4 sm:p-6 flex-1 flex flex-col">
+                <motion.h3 
+                  className="text-base xs:text-lg sm:text-xl font-bold text-gray-900 dark:text-white 
+                           mb-2 line-clamp-2 group-hover:text-primary-600 dark:group-hover:text-primary-400 
+                           transition-colors duration-300"
+                  whileHover={{ x: 5 }}
+                  transition={{ duration: 0.2 }}
+                >
                   {project.title}
-                </h3>
+                </motion.h3>
                 
-                <p className={`${textClass.secondary} text-xs xs:text-sm sm:text-base mb-3 sm:mb-4 line-clamp-3`}>
+                <p className="text-gray-600 dark:text-gray-300 text-xs xs:text-sm sm:text-base 
+                           mb-3 sm:mb-4 line-clamp-3 leading-relaxed flex-1">
                   {project.summary}
                 </p>
                 
-                <div className="mb-4 flex flex-wrap gap-1.5">
+                <motion.div 
+                  className="mb-4 flex flex-wrap gap-1.5"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.2 }}
+                >
                   {project.technologies.slice(0, 4).map((tech, idx) => (
-                    <span 
+                    <motion.span 
                       key={idx} 
-                      className="text-xs font-medium px-2 py-0.5 rounded-full bg-teal-100 text-teal-800 dark:bg-teal-900/40 dark:text-teal-300"
+                      className="text-xs font-medium px-2 py-0.5 rounded-full bg-primary-100 
+                               dark:bg-primary-900/30 text-primary-800 dark:text-primary-300 
+                               border border-primary-200 dark:border-primary-700/50"
+                      whileHover={{ scale: 1.05, y: -2 }}
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: 0.1 * idx }}
                     >
                       {tech}
-                    </span>
+                    </motion.span>
                   ))}
                   {project.technologies.length > 4 && (
-                    <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300">
+                    <motion.span 
+                      className="text-xs font-medium px-2 py-0.5 rounded-full bg-gray-100 
+                               text-gray-800 dark:bg-gray-800 dark:text-gray-300"
+                      whileHover={{ scale: 1.05, y: -2 }}
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: 0.4 }}
+                    >
                       +{project.technologies.length - 4}
-                    </span>
+                    </motion.span>
                   )}
-                </div>
+                </motion.div>
                 
-                <div className="flex flex-col xs:flex-row gap-2 sm:gap-3">
-                  <a 
-                    href={project.github} 
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-center px-3 sm:px-4 py-1.5 sm:py-2 bg-gray-800 dark:bg-gray-700 text-white text-sm rounded-lg hover:bg-gray-700 dark:hover:bg-gray-600 transition-colors duration-300"
-                    onClick={(e) => e.stopPropagation()}
+                <motion.div 
+                  className="flex flex-col xs:flex-row gap-2 sm:gap-3 mt-auto"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.3 }}
+                >
+                  <motion.button
+                    className="flex items-center justify-center px-3 sm:px-4 py-1.5 sm:py-2 
+                             bg-gradient-to-r from-primary-600 to-primary-700 
+                             hover:from-primary-700 hover:to-primary-800 text-white text-sm 
+                             rounded-lg font-medium transition-all duration-300 
+                             shadow-lg hover:shadow-xl transform hover:-translate-y-0.5
+                             flex-1 group/btn"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setSelectedProject(project);
+                    }}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
                   >
-                    <FaGithub className="mr-1.5" />
-                    <span className="whitespace-nowrap">GitHub</span>
-                  </a>
-                  <a 
-                    href={project.demo} 
-                    target="_blank"
-                    rel="noopener noreferrer" 
-                    className="flex items-center justify-center px-3 sm:px-4 py-1.5 sm:py-2 bg-teal-600 text-white text-sm rounded-lg hover:bg-teal-700 transition-colors duration-300"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    <FaExternalLinkAlt className="mr-1.5" />
-                    <span className="whitespace-nowrap">Live Demo</span>
-                  </a>
-                </div>
+                    <FaEye className="mr-1.5 text-sm group-hover/btn:scale-110 transition-transform duration-200" />
+                    <span className="whitespace-nowrap">View Details</span>
+                  </motion.button>
+                  
+                  {project.github && (
+                    <motion.a 
+                      href={project.github} 
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center px-3 sm:px-4 py-1.5 sm:py-2 
+                               border-2 border-primary-600 text-primary-600 hover:bg-primary-600 
+                               hover:text-white text-sm rounded-lg font-medium transition-all duration-300
+                               hover:shadow-lg transform hover:-translate-y-0.5 group/github"
+                      onClick={(e) => e.stopPropagation()}
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      <FaGithub className="mr-1.5 text-lg group-hover/github:scale-110 transition-transform duration-200" />
+                      <span className="whitespace-nowrap">Source</span>
+                    </motion.a>
+                  )}
+                </motion.div>
               </div>
             </motion.div>
           ))}
@@ -330,7 +418,9 @@ const ProjectsSection = () => {
                     {selectedProject.technologies.map((tech, idx) => (
                       <span 
                         key={idx} 
-                        className="text-sm font-medium px-3 py-1 rounded-full bg-teal-100 text-teal-800 dark:bg-teal-900/40 dark:text-teal-300"
+                        className="text-sm font-medium px-3 py-1 rounded-full bg-primary-100 
+                                 dark:bg-primary-900/30 text-primary-800 dark:text-primary-300 
+                                 border border-primary-200 dark:border-primary-700/50"
                       >
                         {tech}
                       </span>
@@ -339,24 +429,28 @@ const ProjectsSection = () => {
                 </div>
                 
                 <div className="flex flex-col sm:flex-row gap-4">
-                  <a 
-                    href={selectedProject.github} 
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={buttonClass.secondary}
+                  {selectedProject.github && (
+                    <a 
+                      href={selectedProject.github} 
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center px-6 py-3 bg-gray-800 
+                               dark:bg-gray-700 text-white rounded-lg hover:bg-gray-700 
+                               dark:hover:bg-gray-600 transition-colors duration-300 font-medium"
+                    >
+                      <FaGithub className="mr-2" />
+                      View Source Code
+                    </a>
+                  )}
+                  <button 
+                    className="flex items-center justify-center px-6 py-3 bg-gradient-to-r 
+                             from-primary-600 to-primary-700 hover:from-primary-700 
+                             hover:to-primary-800 text-white rounded-lg transition-all 
+                             duration-300 font-medium shadow-lg hover:shadow-xl"
                   >
-                    <FaGithub className="mr-2" />
-                    View Source Code
-                  </a>
-                  <a 
-                    href={selectedProject.demo} 
-                    target="_blank"
-                    rel="noopener noreferrer" 
-                    className={buttonClass.primary}
-                  >
-                    <FaExternalLinkAlt className="mr-2" />
-                    Visit Live Demo
-                  </a>
+                    <FaInfoCircle className="mr-2" />
+                    Project Details
+                  </button>
                 </div>
               </div>
             </motion.div>

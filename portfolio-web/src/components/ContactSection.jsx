@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { FaGithub, FaLinkedin, FaEnvelope, FaPaperPlane } from 'react-icons/fa';
+import emailjs from '@emailjs/browser';
 
 const ContactSection = () => {
   const [ref, inView] = useInView({
@@ -32,23 +33,53 @@ const ContactSection = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setFormStatus({ submitted: false, submitting: true, error: null });
-
+    
     try {
-      // In a real application, you would send the form data to your backend or a form service
-      // This is a mock submission - replace with your actual form handling logic
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      setFormStatus({ submitted: true, submitting: false, error: null });
+      // EmailJS configuration from environment variables
+      const serviceID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+      const templateID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+      const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
+      // Check if EmailJS is properly configured
+      if (!serviceID || !templateID || !publicKey || 
+          serviceID === 'your_service_id_here' || 
+          templateID === 'your_template_id_here' || 
+          publicKey === 'your_public_key_here') {
+        throw new Error('EmailJS not configured');
+      }
+
+      const templateParams = {
+        from_name: formData.name,
+        from_email: formData.email,
+        message: formData.message,
+        reply_to: formData.email,
+        to_name: 'Theekshana Thathsara',
+        website_url: 'https://thathsara.netlify.app',
+        timestamp: new Date().toLocaleString(),
+      };
+
+      const response = await emailjs.send(serviceID, templateID, templateParams, publicKey);
       
-      // Clear the form after submission
-      setFormData({ name: '', email: '', message: '' });
-      
+      if (response.status === 200) {
+        setFormStatus({ submitted: true, submitting: false, error: null });
+        setFormData({ name: '', email: '', message: '' });
+      } else {
+        throw new Error('Failed to send email');
+      }
     } catch (error) {
-      console.error('Error submitting form:', error);
-      setFormStatus({
-        submitted: false, 
-        submitting: false, 
-        error: 'There was an error submitting your form. Please try again.'
-      });
+      console.error('EmailJS send failed:', error);
+      
+      // Fallback: open user's default mail client with pre-filled subject/body
+      const subject = encodeURIComponent(`Portfolio message from ${formData.name || formData.email || 'Website'}`);
+      const body = encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`);
+      const mailto = `mailto:thathsaragpht@gmail.com?subject=${subject}&body=${body}`;
+
+      // Attempt to open mail client
+      window.location.href = mailto;
+
+      // Mark as submitted (user will send via their mail client)
+      setFormStatus({ submitted: true, submitting: false, error: null });
+      setFormData({ name: '', email: '', message: '' });
     }
   };
 
@@ -121,7 +152,10 @@ const ContactSection = () => {
                 </button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit}>
+              <form onSubmit={handleSubmit} name="contact" data-netlify="true" netlify-honeypot="bot-field">
+                {/* Netlify form hidden fields */}
+                <input type="hidden" name="form-name" value="contact" />
+                <input type="hidden" name="bot-field" />
                 <div className="mb-6">
                   <label htmlFor="name" className="block text-gray-700 dark:text-gray-300 mb-2">Name</label>
                   <input
@@ -242,7 +276,7 @@ const ContactSection = () => {
                   Email is the best way to contact me for any inquiries. I typically respond within 24 hours.
                 </p>
                 <a 
-                  href="mailto:your.email@example.com" 
+                  href="mailto:thathsaragpht@gmail.com" 
                   className="inline-block mt-3 border-b-2 border-white hover:border-opacity-100 border-opacity-50 font-medium transition-all"
                 >
                   thathsaragpht@gmail.com
